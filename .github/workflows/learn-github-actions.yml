@@ -32,7 +32,7 @@ jobs:
         run: npm run build
 
       - name: Publish artifacts
-        uses: actions/upload-artifacts@master
+        uses: actions/upload-artifact@master
         with:
           name: dist
           path: dist
