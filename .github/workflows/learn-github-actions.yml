@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
         env: 
           NODE_ENV: dev
-          AWS_USERPOOLID: ${{secret.DEV_AWS_USERPOOLID}}
+          AWS_USERPOOLID: ${{secrets.AWS_USERPOOLID}}
       - name: npm install
         run: npm install
 
