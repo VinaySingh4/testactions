@@ -18,19 +18,11 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Run Build
         env: 
           NODE_ENV: dev
           AWS_USERPOOLID: ${{secret.DEV_AWS_USERPOOLID}}
-
-      
-
-      # Runs a single command using the runners shell
       - name: npm install
         run: npm install
 
@@ -46,8 +38,14 @@ jobs:
 
   aws_deployment:
     runs-on: ubuntu-latest
+    name: Deploy 
     needs: [build]
     steps:
+    - name: download artifacts
+      uses: actions/download-artifact@dev
+      with:
+        name: dist
+    - name: deploy to s3
     - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
       with:
