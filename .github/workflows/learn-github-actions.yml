@@ -31,21 +31,12 @@ jobs:
       - name: Run build 
         run: npm run build
 
-      - name: Publish artifacts
-        uses: actions/upload-artifact@master
-        with:
-          name: dist
-          path: dist/testgithooks/*
 
   aws_deployment:
     runs-on: ubuntu-latest
     name: Deploy 
     needs: [build]
     steps:
-      - name: download artifacts
-        uses: actions/download-artifact@master
-        with:
-          name: dist
       - name: deploy to s3
         
         uses: jakejarvis/s3-sync-action@master
